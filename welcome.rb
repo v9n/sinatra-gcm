@@ -122,6 +122,27 @@ get '/create' do
   resp.inspect
 end  
 
+get '/send_message' do 
+  post_args = {
+    :registration_ids => ["1"],
+    :data => {
+      :msg    => "Welcome to iCeeNee",
+      :coupon => "iCeeNee"
+    }
+  }
+  resp = RestClient.post 'https://android.googleapis.com/gcm/send', post_args.to_json, :Authorization => 'key=AIzaSyBnio3IpScnAR_W_61UArwWMbPyym9ao7M',:content_type => :json, :accept => :json
+  resp.inspect
+end
+
+
+# Handling device registration. Storing registrationId into a mongo db
+# 
+#
+#
+
+post 'new_device' do
+end
+
 #
 # 2ed1d303c6d9db90e9be50b706983356fe5e7227
 #Your OAuth access token: 2ed1d303c6d9db90e9be50b706983356fe5e7227
