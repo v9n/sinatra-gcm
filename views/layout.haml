@@ -1,0 +1,64 @@
+!!! 5
+%html{:lang => 'en'}
+	%head 
+		%title Sinatra GCM: Sinatra GCM.
+		%link{:href => url('/css/style.css'), :rel => 'stylesheet', :media => 'screen, projection'}
+		%link{:href => url('/bootstrap/css/bootstrap.css'), :rel => 'stylesheet', :media => 'screen, projection'}
+	%body.page-index
+		.navbar.navbar-fixed-top
+			.navbar-inner
+				.container-fluid
+					%a.btn.btn-navbar{:data => {:toggle => 'collapse', :target => '.nav-collapse'}}
+						%span.icon-bar
+						%span.icon-bar
+						%span.icon-bar
+
+					%a.brand{:href => '#'} Sinatra GCM	
+					.btn-group.pull-right
+						%a.btn.dropdown-toggle{:href => url('/'), :data => {:toggle => 'dropdown'}}
+							%i.icon-user
+							Welcome, admin
+							%span.caret
+						%ul.dropdown-menu
+							%li
+								%a{:href => url('/logout')} Sign out
+					.nav-collapse 
+						%ul.nav
+							%li.active
+								%a{:href => url('/auth/github')} 
+									%i.icon-white.icon-lock
+									Login
+							%li
+								%a#nav-about{:href => '/about'} 
+									%i.icon-info-sign.icon-white
+									About	
+		.container-fluid
+			= yield
+
+
+		%footer.footer.container-fluid
+			%hr
+			%p.pull-right
+				%a{:href => url('/')} Back to top
+			%p 
+				Designed and built with love, blood&amp; tear by 
+				%a{:href => 'http://axcoto.com'} kureikain. 
+				Inspired by 
+				%a{:href => 'http://dabblet.com'} Dabblet
+				&amp;
+				%a{:href => 'http://rubular.com'} Rubular.
+			%p	
+				With the help of 
+				%a{:href => 'http://twitter.github.com/bootstrap/'} Bootstrap
+				and
+				%a{:href => 'http://twitter.github.com/bootstrap/'} Sinatra
+				Host on
+				%a{:href => 'http://heroku.com'} Heroku
+			%p
+				Help me 
+				%a{:href => 'https://github.com/kureikain/sigular'} make it better
+		
+		%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"}
+		%script{:src => "bootstrap/js/bootstrap.min.js"}
+		%script{:src => "js/app.js?v=4"}
+				
