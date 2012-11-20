@@ -7,4 +7,4 @@ gem 'therubyracer'
 gem 'less'
 gem 'oauth2'
 gem 'rest-client'
-
+gem 'mongo_mapper'
