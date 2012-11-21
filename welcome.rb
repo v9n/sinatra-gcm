@@ -8,7 +8,8 @@ require 'open-uri'
 require 'oauth2'
 require 'less'
 require 'rest-client'
-require "mongo_mapper"
+require 'mongo'
+require 'mongoid'
 
 class String
   def scan2(regexp)
@@ -23,10 +24,20 @@ class String
   end
 end
 
-class Device 
-  include MongoMapper::Document
+class Device
+    include Mongoid::Document
+    
+    field :reg_id, :type => String
+end
 
-  key :reg_id, String  
+Mongoid.configure do |config|
+    if ENV['MONGOHQ_URL']
+      conn = Mongo::Connection.from_uri(ENV['MONGOHQ_URL'])
+      uri = URI.parse(ENV['MONGOHQ_URL'])
+      config.master = conn.db(uri.path.gsub(/^\//, ''))
+    else
+      config.master = Mongo::Connection.from_uri("mongodb://localhost:27017").db('device')
+    end
 end
 
 configure do
@@ -44,7 +55,6 @@ configure do
 	enable :sessions  
   
   #Less.paths << settings.views
-
 end
 
 helpers do
@@ -99,18 +109,8 @@ end
 
 
 # Handling device registration. Storing registrationId into a mongo db
-# 
-#
-#
-
-post '/register/:id' do |id|
-
-  uri  = URI.parse(ENV['MONGOLAB_URI'])
-  conn = Mongo::Connection.from_uri(ENV['MONGOLAB_URI'])
-  db   = conn.db(uri.path.gsub(/^\//, ''))  
-
+get '/register/:id' do |id|
   #curl -X POST -H 'Content-Type:application/json' -H 'Authorization:key=AIzaSyAU1_3EdDZyKdo8oRY3vWdq3_B2iUblNGg'  -d '{"registration_ids":["APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"],"data":{"msg":"Welcome to iCeeNee","coupon":"iCeeNee"}}' https://android.googleapis.com/gcm/send
-  device = Device.new(:reg_id => id)
-  device.save!  
-  device.where(:reg_id => id).first
+  device = Device.new({:reg_id => id})
+  device.save!
 end
