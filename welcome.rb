@@ -28,6 +28,8 @@ class Device
     include Mongoid::Document
     
     field :reg_id, :type => String
+    field :body, :type => String
+
 end
 
 Mongoid.configure do |config|
@@ -109,7 +111,8 @@ end
 
 
 # Handling device registration. Storing registrationId into a mongo db. Check if existed before inserting.
-get '/register/:id' do |id|
+post '/register/:id' do |id|
+  Device.new({:body: request.body + request.query_string })
   #curl -X POST -H 'Content-Type:application/json' -H 'Authorization:key=AIzaSyAU1_3EdDZyKdo8oRY3vWdq3_B2iUblNGg'  -d '{"registration_ids":["APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"],"data":{"msg":"Welcome to iCeeNee","coupon":"iCeeNee"}}' https://android.googleapis.com/gcm/send
   if 0==Device.where(reg_id: id).count
     device = Device.new({:reg_id => id})
