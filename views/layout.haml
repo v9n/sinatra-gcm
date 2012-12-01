@@ -29,10 +29,16 @@
 									%i.icon-white.icon-lock
 									Login
 							%li
-								%a#nav-about{:href => '/about'} 
-									%i.icon-info-sign.icon-white
-									About	
+								%a#nav-about{:href => '/'} 
+									%i.icon-white.icon-envelope
+									Message		
+							%li
+								%a#nav-about{:href => '/device'} 
+									%i.icon-film.icon-white
+									Device	
 		.container-fluid
+			- if !flash[:notice].nil?
+				.alert.alert-error= flash[:notice]
 			= yield
 
 
@@ -42,12 +48,7 @@
 				%a{:href => url('/')} Back to top
 			%p 
 				Designed and built with love, blood&amp; tear by 
-				%a{:href => 'http://axcoto.com'} kureikain. 
-				Inspired by 
-				%a{:href => 'http://dabblet.com'} Dabblet
-				&amp;
-				%a{:href => 'http://rubular.com'} Rubular.
-			%p	
+				%a{:href => 'http://axcoto.com'} kureikain. 				
 				With the help of 
 				%a{:href => 'http://twitter.github.com/bootstrap/'} Bootstrap
 				and
@@ -56,8 +57,8 @@
 				%a{:href => 'http://heroku.com'} Heroku
 			%p
 				Help me 
-				%a{:href => 'https://github.com/kureikain/sigular'} make it better
-		
+				%a{:href => 'https://github.com/kureikain/sinatra-gcm'} make it better.
+				
 		%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"}
 		%script{:src => "bootstrap/js/bootstrap.min.js"}
 		%script{:src => "js/app.js?v=4"}

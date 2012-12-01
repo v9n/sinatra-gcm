@@ -1,0 +1,26 @@
+.row-fluid						
+	#device-list
+		%table.table.table-bordered
+			%thead
+				%tr
+					%th Reg Id
+					%th OS
+					%th Date
+					%th Action	
+			%tbody			
+			- devices.each do |d|
+				%tr
+					%td= d.reg_id										
+					%td= d.os.nil?? 'Android':d.os
+					%td= Time.at(d._id.to_s.slice(0,8).to_i(16))
+					%td
+						%a.btn.btn-danger.btn-mini{:href => "remove_device/#{d._id}"} 
+							%i.icon-trash.icon-white
+			%tfoot
+				%tr
+					%td{:colspan => 3}
+						%h4= "We have #{devices.count} registered devices"
+					%td						
+						%a.more-device.btn-small
+							%i.icon-refresh
+							Load more

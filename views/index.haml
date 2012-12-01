@@ -1,18 +1,61 @@
 .row-fluid
-	%form#sigular-regex.well{:method => 'POST', :action => 'save'}
+	%form.well.form-horizontal{:method => 'POST', :action => '/message/save'}
 		%fieldset
-			%legend Message (JSON) 
-			.control-group
-				%label Short describption of this regex
-				%input.span12{:type => 'text', :name => 'description', :id => 'description'}
-			
-			.form-action
-				%a.btn.btn-primary#more-test 
-					%i.icon-plus					
-					Send
+			%legend Message
 
-		%fieldset#test-string-wrap
-			.control-group.test-string.row-fluid	
-				Old message here	
-				
-					
+			.control-group
+
+				%label.control-label Body
+				.controls
+					%input.input-xxlarge{:type => 'text', :name => 'body', :id => 'mesage-body', :placeholder => 'Content of message to send'}
+			
+			.control-group
+
+				%label.control-label URL
+				.controls
+					%input.input-xxlarge{:type => 'text', :name => 'url', :id => 'message-url', :placeholder => 'URL of this message'}			
+
+			.control-group
+				.controls
+					%button.btn.btn-primary#action-save-message{:type => 'Submit'}
+						%i.icon-plus
+						Save
+					%a.btn.btn-primary#action-send-message
+						%i.icon-ok
+						Send
+
+	
+.row-fluid
+	#message-list	
+		%table.table.table-bordered
+			%thead
+				%tr
+					%th Message body
+					%th URL
+					%th Date
+					%th Send at
+					%th Action	
+
+			%tbody		
+			- messages.each do |m|
+				%tr
+					%td= m.body
+					%td
+						%a{:href => m.url}= m.url
+					%td= Time.at(m._id.to_s.slice(0,8).to_i(16)).strftime("%Y-%m-%d")
+					%td
+						- m.send_at.each do |t|
+							%span.label.label-inverse= Time.at(t).strftime("%Y-%m-%d %H:%M:%S")
+						%br	
+					%td
+						.btn-group
+							%a.btn.btn-mini{:href => "message/send/#{m._id}"} 
+								%i.icon-envelope
+
+							%a.btn.btn-danger.btn-mini{:href => "message/remove/#{m._id}"} 
+								%i.icon-trash.icon-white
+
+			%tfoot
+				%tr
+					%td{:colspan => 4}
+						%h4= "We send #{messages.count} messages"	
