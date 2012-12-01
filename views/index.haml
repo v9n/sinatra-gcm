@@ -1,7 +1,7 @@
 .row-fluid
 	%form.well.form-horizontal{:method => 'POST', :action => '/message/save'}
 		%fieldset
-			%legend Message
+			%legend Notifications
 
 			.control-group
 
@@ -13,7 +13,19 @@
 
 				%label.control-label URL
 				.controls
-					%input.input-xxlarge{:type => 'text', :name => 'url', :id => 'message-url', :placeholder => 'URL of this message'}			
+					%input.input-xxlarge{:type => 'text', :name => 'url', :id => 'message-url', :placeholder => 'URL of this message'}
+
+			.control-group
+
+				%label.control-label Device
+				.controls
+					%label
+						Manually enter device id
+						%input{:type => 'checkbox'}
+					%div{:style => 'display: none'}	
+						%textarea
+
+
 
 			.control-group
 				.controls
@@ -57,5 +69,5 @@
 
 			%tfoot
 				%tr
-					%td{:colspan => 4}
-						%h4= "We send #{messages.count} messages"	
+					%td{:colspan => 5}
+						%h4= "We have #{messages.count} notification."	
