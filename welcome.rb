@@ -186,7 +186,7 @@ post '/register' do
   puts params.inspect
   #curl -X POST -H 'Content-Type:application/json' -H 'Authorization:key=AIzaSyAU1_3EdDZyKdo8oRY3vWdq3_B2iUblNGg'  -d '{"registration_ids":["APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"],"data":{"msg":"Welcome to iCeeNee","coupon":"iCeeNee"}}' https://android.googleapis.com/gcm/send
   if 0==Device.where(reg_id: params[:regId]).count
-    device = Device.new({:reg_id => params[:regId], :os => params[:os].nil?? 'android':'ios'})
+    device = Device.new({:reg_id => params[:regId], :email => params[:email],:os => params[:os].nil?? 'android':'ios'})
     device.save!
     "Saved"
   else 
@@ -211,5 +211,3 @@ end
 get '/css/:style.css' do
   less params[:style].to_sym, :paths => ["public/css"], :layout => false
 end
-
-
