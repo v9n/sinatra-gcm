@@ -58,6 +58,7 @@ class Device
     include Mongoid::Document
     
     field :reg_id, :type => String
+    field :email, :type => String
     field :os, :type => String, :default => 'android'    
 end
 
