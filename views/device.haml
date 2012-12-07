@@ -4,13 +4,15 @@
 			%thead
 				%tr
 					%th Reg Id
+					%th Email
 					%th OS
 					%th Date
 					%th Action	
 			%tbody			
 			- devices.each do |d|
 				%tr
-					%td= d.reg_id										
+					%td= d.reg_id	
+					%td= d.email									
 					%td= d.os.nil?? 'Android':d.os
 					%td= Time.at(d._id.to_s.slice(0,8).to_i(16))
 					%td

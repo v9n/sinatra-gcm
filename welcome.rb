@@ -198,7 +198,7 @@ end
 get '/remove_device/:name' do |name|
   Device.find(name).delete 
   flash[:notice] = "Device is removed!"
-  redirect '/'
+  redirect '/device'
 end
 
 get '/about' do
