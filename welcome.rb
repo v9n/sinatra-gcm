@@ -162,6 +162,8 @@ get '/send_message' do
   }
   resp = RestClient.post 'https://android.googleapis.com/gcm/send', post_args.to_json, :Authorization => 'key=' + settings.AUTHORIZE_KEY, :content_type => :json, :accept => :json
   resp.inspect
+  Log.new({body: resp.inspect}).save
+  
 end
 
 get '/device' do
