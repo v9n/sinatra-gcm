@@ -140,7 +140,7 @@ get '/message/send/:id' do |id|
   }
   resp = RestClient.post 'https://android.googleapis.com/gcm/send', post_args.to_json, :Authorization => 'key=' + settings.AUTHORIZE_KEY, :content_type => :json, :accept => :json
   puts resp.inspect
-  Log.new({:body => resp.inspect, :t => 'Message Sending'})
+  Log.new({:body => resp.inspect, :t => 'Message Sending'}).save
 
   m.send_at = [] if m.send_at.nil?
   m.send_at.push Time.now.to_i
