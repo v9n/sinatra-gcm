@@ -153,8 +153,8 @@ get '/message/send/:id' do |id|
   m.send_at.push Time.now.to_i
   m.save  
   # puts m.inspect
-  # flash[:notice] = "Message is sent to Google GCM Server."
-  #redirect '/'   
+  flash[:notice] = "Message is sent to Google GCM Server."
+  redirect '/'   
 end
 
 get '/send_message' do
