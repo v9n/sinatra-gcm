@@ -139,7 +139,7 @@ get '/message/send/:id' do |id|
 
   registration_ids = [
     "APA91bHUpmULOkmrThGmUr3Gg0XucMY-YMxtaOCiJFRkwE4yunJkcTgl-IPfzvBjMsWFHSAMZqwOV0mn8yWYjbzL90viU97mR1eBQKpE4-PwPApTnagZXniTIeyiInP73BD-Pb4CYijh3ko1_h9nwWplP1lADEJWXg", 
-    "APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"
+    "APA91bHIk9Jq7rCW0r56P_ahcVQswSjcq4Vo2zYYq6qxvaV7ncRkjRxxCBkn99pH0WaRmOQTlrB2H7Z_jy1L4Wz1Wq2H3oGrj9MHNqyWQz-tXho5ndvIkG6o9vbJBirXeXR-2PzHFojmtcgUzUTBFx_9ldyXZx-oMw"
   ]; 
   post_args = {
     :registration_ids => registration_ids,#["APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"],
