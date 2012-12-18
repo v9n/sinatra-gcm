@@ -137,7 +137,10 @@ get '/message/send/:id' do |id|
     registration_ids.push(d.reg_id)
   end
 
-  registration_ids = ["APA91bHUpmULOkmrThGmUr3Gg0XucMY-YMxtaOCiJFRkwE4yunJkcTgl-IPfzvBjMsWFHSAMZqwOV0mn8yWYjbzL90viU97mR1eBQKpE4-PwPApTnagZXniTIeyiInP73BD-Pb4CYijh3ko1_h9nwWplP1lADEJWXg", "APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"]; 
+  registration_ids = [
+    "APA91bHUpmULOkmrThGmUr3Gg0XucMY-YMxtaOCiJFRkwE4yunJkcTgl-IPfzvBjMsWFHSAMZqwOV0mn8yWYjbzL90viU97mR1eBQKpE4-PwPApTnagZXniTIeyiInP73BD-Pb4CYijh3ko1_h9nwWplP1lADEJWXg", 
+    "APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"
+  ]; 
   post_args = {
     :registration_ids => registration_ids,#["APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"],
     :data => {
