@@ -131,8 +131,14 @@ get '/message/send/:id' do |id|
     redirect '/' 
   end 
 
+  registration_ids = Array.new
+  devices = Device.all
+  devices.each do |d|
+    registration_ids.push(d.reg_id)
+  end
+
   post_args = {
-    :registration_ids => ["APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"],
+    :registration_ids => registration_ids,#["APA91bE6qtP5G46xx1UIlNkocQaRpbsWt29fAldQQw8WOTvXg29-cc5q4kizOvbRsCcDobEk3vv681f545VB4PtL6lDvaME_sZs-rcD0YSyW7Q9hO5euMBEBeO0D6JidtV1R7gHvUvcrUjeslZmKzKsIKKE0-Z9bAg"],
     :data => {
       :msg    => m.body,
       :url => m.url
@@ -145,9 +151,9 @@ get '/message/send/:id' do |id|
   m.send_at = [] if m.send_at.nil?
   m.send_at.push Time.now.to_i
   m.save  
-  puts m.inspect
-  flash[:notice] = "Message is sent to Google GCM Server."
-  redirect '/'   
+  # puts m.inspect
+  # flash[:notice] = "Message is sent to Google GCM Server."
+  #redirect '/'   
 end
 
 get '/send_message' do
