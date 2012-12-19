@@ -27,7 +27,26 @@ class String
   end
 end
 
-configure do
+configure :production do
+  set :logging, :true
+  set :AUTHORIZE_KEY => 'AIzaSyAU1_3EdDZyKdo8oRY3vWdq3_B2iUblNGg'
+ 
+  # same as `set :option, true`
+  enable :option
+
+  # same as `set :option, false`
+  #disable :option  
+  
+  # you can also have dynamic settings with blocks
+  set(:css_dir) { File.join(views, 'css') }
+  enable :sessions  
+  
+  #Less.paths << settings.views
+end
+
+
+configure :development do
+  set :dev_mode, :true
   set :logging, :true
   set :AUTHORIZE_KEY => 'AIzaSyAU1_3EdDZyKdo8oRY3vWdq3_B2iUblNGg'
  
@@ -80,6 +99,12 @@ class Message
     field :send_at, :type => Array, :default => []
 end
 
+class Config 
+    include Mongoid::Document
+    field :value
+    field :name
+end
+
 
 
 helpers do
@@ -94,6 +119,11 @@ end
 get '/' do
   messages = Message.all
   haml :index, :locals => {:messages => messages}  
+end
+
+get '/config' do
+  settings = Config.all
+  haml :config, :locals => {:settings => settings}  
 end
 
 get '/message/remove/:id' do |id|
@@ -205,6 +235,19 @@ post '/register' do
   else 
     "existed"
   end
+end
+
+post '/unregister' do
+  Log.new({param: params, body: request.body.read, t: "Removed Device"}).save
+    
+  if (params[:redId].nil?) do
+    status 500
+    {:result => 0, :message => "Missing device ID"}.to_json
+  else
+    
+    Device.find(params[:regId]).delete
+    {:result => 1, :message => "Removed device"}.to_json
+  end  
 end
 
 get '/remove_device/:name' do |name|

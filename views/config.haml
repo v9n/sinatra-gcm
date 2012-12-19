@@ -1,0 +1,37 @@
+.row-fluid
+	%form.well.form-horizontal{:method => 'POST', :action => '/message/save'}
+		%fieldset
+			%legend Setting
+
+			.control-group
+
+				%label.control-label Developmention mode
+				.controls
+					%input.input-xxlarge{:type => 'text', :name => 'body', :id => 'mesage-body', :placeholder => 'Content of message to send'}
+			
+			.control-group
+
+				%label.control-label URL
+				.controls
+					%input.input-xxlarge{:type => 'text', :name => 'url', :id => 'message-url', :placeholder => 'URL of this message'}
+
+			.control-group
+
+				%label.control-label Device
+				.controls
+					%label
+						Manually enter device id
+						%input{:type => 'checkbox'}
+					%div{:style => 'display: none'}	
+						%textarea
+
+
+
+			.control-group
+				.controls
+					%button.btn.btn-primary#action-save-message{:type => 'Submit'}
+						%i.icon-plus
+						Save
+					%a.btn.btn-primary#action-send-message
+						%i.icon-ok
+						Send

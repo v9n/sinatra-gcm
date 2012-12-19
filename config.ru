@@ -3,3 +3,4 @@ Encoding.default_internal = Encoding::UTF_8
 
 require './welcome'
 run Sinatra::Application
+set :environment, :development
