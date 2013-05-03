@@ -240,7 +240,7 @@ end
 post '/unregister' do
   Log.new({param: params, body: request.body.read, t: "Removed Device"}).save
     
-  if (params[:redId].nil?) do
+  if (params[:redId].nil?)
     status 500
     {:result => 0, :message => "Missing device ID"}.to_json
   else
