@@ -99,7 +99,7 @@ class Message
     field :send_at, :type => Array, :default => []
 end
 
-class Config 
+class Zconfig 
     include Mongoid::Document
     field :value
     field :name
@@ -122,7 +122,7 @@ get '/' do
 end
 
 get '/config' do
-  settings = Config.all
+  settings = Zconfig.all
   haml :config, :locals => {:settings => settings}  
 end
 
