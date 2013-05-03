@@ -99,7 +99,7 @@ class Message
     field :send_at, :type => Array, :default => []
 end
 
-class Config 
+class Zconfig 
     include Mongoid::Document
     field :value
     field :name
@@ -122,7 +122,7 @@ get '/' do
 end
 
 get '/config' do
-  settings = Config.all
+  settings = Zconfig.all
   haml :config, :locals => {:settings => settings}  
 end
 
@@ -240,7 +240,7 @@ end
 post '/unregister' do
   Log.new({param: params, body: request.body.read, t: "Removed Device"}).save
     
-  if (params[:redId].nil?) do
+  if (params[:redId].nil?)
     status 500
     {:result => 0, :message => "Missing device ID"}.to_json
   else
